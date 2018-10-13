@@ -8,11 +8,11 @@ main :-
     read(State),
     find_weather(City, State),
     listing(weather),
-    retract(weather_data:weather(A, B, "Gama")),
-    %term_string(A, A_atom),
-    writeln(A),
-    operator(A, 25, Op),
-    activity(X, grupo, Op, 25),
+    retract(weather_data:weather(Temp, _, "Gama")),
+    writeln('Enter the [group] or [singular] activity:'),
+    read(Type),
+    operator(Temp, 25, Op),
+    activity(X, Type, Op, 25),
     term_to_atom(X, X_atom),
     writeln(X_atom).
 
