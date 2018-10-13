@@ -4,11 +4,12 @@
 :- use_module(library(http/json)).
 
 :- dynamic weather/3.
+% weather(temperature:integer, humidity:string, city_name:string)
 
 find_weather(City, State) :- 
   generate_url(City, State, Url),
   setup_call_cleanup(
-    http_open(Url , Stream, [request_header('Accept'='application/json')]),
+    http_open(Url, Stream, [request_header('Accept'='application/json')]),
     json_read_dict(Stream, Dict),
     close(Stream)
   ), 
