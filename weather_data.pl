@@ -1,16 +1,9 @@
+:- module(weather_data, [find_weather/2]).
+
 :- use_module(library(http/http_open)).
 :- use_module(library(http/json)).
 
 :- dynamic weather/3.
-
-main :- 
-  writeln('Enter the city name:'),
-  read(City),
-  writeln('Enter the state initials:'),
-  read(State),
-  find_weather(City, State),
-  listing
-  .
 
 find_weather(City, State) :- 
   generate_url(City, State, Url),
