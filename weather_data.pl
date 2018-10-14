@@ -12,8 +12,9 @@ find_weather(City, State) :-
     http_open(Url, Stream, [request_header('Accept'='application/json')]),
     json_read_dict(Stream, Dict),
     close(Stream)
-  ), 
-  assert(weather(Dict.temp, Dict.humidity, Dict.city_name)).
+  ),
+  string_lower(Dict.city_name, CityName),
+  assert(weather(Dict.temp, Dict.humidity, CityName)).
 
 generate_url(City, State, Url) :-
   term_to_atom(City, CityName),
