@@ -2,8 +2,8 @@
 :- use_module(activity).
 
 main :- 
-    get_information(City, State, Type),
-    find_weather(City, State),
+    get_information(City, State, Type, CityTerm),
+    find_weather(CityTerm, State),
     resolve_operator(City, Operator),
     find_activity(Type, Operator).
 
@@ -12,7 +12,7 @@ find_activity(Type, Operator) :-
     term_to_atom(Activity, ActivityAtom),
     writeln(ActivityAtom).
 
-get_information(City, State, Type) :- 
+get_information(City, State, Type, CityTerm) :- 
     writeln('Enter the city name:'),
     read(CityTerm),
     term_string(CityTerm, City),
