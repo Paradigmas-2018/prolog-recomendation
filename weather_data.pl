@@ -14,7 +14,8 @@ find_weather(City, State) :-
     close(Stream)
   ),
   string_lower(Dict.city_name, CityName),
-  assert(weather(Dict.temp, Dict.humidity, CityName, Dict.condition_slug)).
+  term_string(Humidity, Dict.humidity),
+  assert(weather(Dict.temp, Humidity, CityName, Dict.condition_slug)).
 
 generate_url(City, State, Url) :-
   term_to_atom(City, CityName),
