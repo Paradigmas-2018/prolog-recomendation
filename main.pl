@@ -5,14 +5,14 @@ main :-
     get_city_information(City, State, CityTerm),
     find_weather(CityTerm, State),
     resolve_operators(City, TempOperator, HumOperator),
-    get_activity_information(Type), nl,
+    get_activity_information(Type, Money), nl,
     message(TempOperator, HumOperator, Message),
     writeln(Message), nl,
     writeln('We search the follow activities in our base:'),
-    find_activity(Type, TempOperator, HumOperator).
+    find_activity(Type, Money, TempOperator, HumOperator).
 
-find_activity(Type, TempOperator, HumOperator) :-
-    activity(Activity, Type, TempOperator, HumOperator),
+find_activity(Type, Money, TempOperator, HumOperator) :-
+    activity(Activity, Type, Money, TempOperator, HumOperator),
     term_to_atom(Activity, ActivityAtom),
     writeln(ActivityAtom), fail.
 
@@ -26,10 +26,13 @@ get_city_information(City, State, CityTerm) :-
     read(State),
     writeln('Just a second, we a retrieve the weather informations from a server...'), nl.
 
-get_activity_information(Type) :-
-    writeln('Just answer if you are in group or not...'),
+get_activity_information(Type, Money) :-
+    writeln('Answer if you are in group or not...'),
     writeln('Please, enter [group] or [singular]:'),
-    read(Type).
+    read(Type), nl,
+    writeln('Just answer if have money or not...'),
+    writeln('Please, enter [cheap] or [expensive]:'),
+    read(Money).
 
 resolve_operators(City, TempOperator, HumOperator) :-
     listing(weather),
